@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferencing App</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <img src="{{ url_for('static', filename='../Images/Logo.png') }}" alt="Logo" id="logo">
+        <h1>Welcome to the Meeting Rooms</h1>
+    </header>
+
+    <!-- Scheduling Section -->
+    <section>
+        <h2>Schedule a Meeting</h2>
+        <form id="schedule-form">
+            <label for="meeting-name">Meeting Name:</label>
+            <input type="text" id="meeting-name" name="meeting-name" required>
+
+            <label for="meeting-date">Date:</label>
+            <input type="date" id="meeting-date" name="meeting-date" required>
+
+            <label for="meeting-time">Time:</label>
+            <input type="time" id="meeting-time" name="meeting-time" required>
+
+            <button type="button" id="schedule-btn">Schedule Meeting</button>
+        </form>
+        <p id="invite-link-container"></p>
+    </section>
+
+    <!-- Jitsi Meet Container -->
+    <div id="meet"></div>
+
+    <!-- Jitsi Meet External API Script -->
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <script>
+        // Meeting Scheduling Logic
+        document.getElementById('schedule-btn').addEventListener('click', () => {
+            const name = document.getElementById('meeting-name').value;
+            const date = document.getElementById('meeting-date').value;
+            const time = document.getElementById('meeting-time').value;
+
+            if (name && date && time) {
+                const roomName = `${name}-${Date.now()}`; // Unique room name
+                const inviteLink = `https://meet.jit.si/${roomName}`;
+
+                // Display the invitation link
+                const inviteContainer = document.getElementById('invite-link-container');
+                inviteContainer.innerHTML = `
+                    <strong>Invitation Link:</strong>
+                    <a href="${inviteLink}" target="_blank">${inviteLink}</a>
+                    <button onclick="copyToClipboard('${inviteLink}')">Copy Link</button>
+                `;
+
+                alert(`Meeting Scheduled!\n\nName: ${name}\nDate: ${date}\nTime: ${time}\n\nLink: ${inviteLink}`);
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        // Copy to Clipboard Function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+
+        // Jitsi Meet API Integration
+        const domain = "meet.jit.si";
+        const options = {
+            roomName: "MyConferenceRoom", // Default room
+            width: "100%",
+            height: 500,
+            parentNode: document.querySelector('#meet')
+        };
+        const api = new JitsiMeetExternalAPI(domain, options);
+
+        // Event listeners for Jitsi Meet API
+        api.addEventListener('readyToClose', () => {
+            // Handle actions when the meeting is ready to close
+            console.log('Meeting is ready to close.');
+        });
+    </script>
+</body>
+</html>

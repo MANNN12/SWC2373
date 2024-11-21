@@ -1,0 +1,117 @@
+/* styles.css */
+
+/* General Reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Header Styling */
+header {
+    background-color: #2a2a72;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 5px solid #ff4b5c;
+}
+
+#logo {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+/* Scheduling Section */
+section {
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #2a2a72;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input, button {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #2a2a72;
+    box-shadow: 0 0 5px #2a2a72;
+}
+
+#schedule-btn {
+    background-color: #ff4b5c;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#schedule-btn:hover {
+    background-color: #e43f4d;
+}
+
+/* Invite Link Container */
+#invite-link-container {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+#invite-link-container a {
+    color: #2a2a72;
+    text-decoration: none;
+}
+
+#invite-link-container button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    background-color: #2a2a72;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#invite-link-container button:hover {
+    background-color: #232355;
+}
+
+/* Jitsi Meet Container */
+#meet {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
